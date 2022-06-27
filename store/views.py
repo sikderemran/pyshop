@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models.product import Product
 from .models.product import Category
-
+from .forms.form import UserForm
 
 def index(request):
     # return HttpResponse('<h1>Hello</h1>')
@@ -18,4 +18,5 @@ def index(request):
 
 
 def signup(request):
-    return render(request, 'signup.html')
+    form=UserForm
+    return render(request, 'signup.html',{'form':form})

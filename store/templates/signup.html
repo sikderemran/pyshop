@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
 {% block content%}
-<h1>hello</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto mt-3">
+            <form method="POST" action="/">
+                {% csrf_token %}
+                <div class="form-group row">
+                  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">name</label>
+                  <div class="col-sm-10">
+                    {{form.name}}
+                  </div>
+                </div>
+                <button style="float: right;" type="submit" class="btn btn-primary mt-3 ">Submit</button>
+                
+              </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
