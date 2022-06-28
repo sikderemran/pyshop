@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models.product import Product
 from .models.product import Category
-from .forms.form import UserForm
+from .forms.form import CustomerForm
 
 def index(request):
     # return HttpResponse('<h1>Hello</h1>')
@@ -18,5 +18,14 @@ def index(request):
 
 
 def signup(request):
-    form=UserForm
+    if request.method=='POST':
+        #print(request.POST.get('email'))
+        customer=CustomerForm(request.POST)
+        if customer.is_valid:
+            try:
+                customer.save()
+                return HttpResponse("data send to database")
+            except:
+                pass
+    form=CustomerForm()
     return render(request, 'signup.html',{'form':form})

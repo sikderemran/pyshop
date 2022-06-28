@@ -1,13 +1,29 @@
 from django import forms
-from ..models.category import Category
+from ..models.customers import Customer
 
-class UserForm(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     class Meta:
-        model=Category
+        model=Customer
         fields="__all__"
         widgets={
-            'name':forms.TextInput(attrs={
+            'firstName':forms.TextInput(attrs={
                 'class':'form-control form-control-sm',
-                'placeholder':'name'
+                'placeholder':'first name'
+                }),
+            'lastName':forms.TextInput(attrs={
+                'class':'form-control form-control-sm',
+                'placeholder':'Last name'
+                }),
+            'phone':forms.TextInput(attrs={
+                'class':'form-control form-control-sm',
+                'placeholder':'Phone'
+                }),
+            'email':forms.TextInput(attrs={
+                'class':'form-control form-control-sm',
+                'placeholder':'Email'
+                }),
+            'password':forms.TextInput(attrs={
+                'class':'form-control form-control-sm',
+                'placeholder':'Password'
                 })
         }
