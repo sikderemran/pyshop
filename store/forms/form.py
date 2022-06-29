@@ -27,3 +27,7 @@ class CustomerForm(forms.ModelForm):
                 'placeholder':'Password'
                 })
         }
+    def register(self):
+        #self.data['email']
+        self.save()
+    

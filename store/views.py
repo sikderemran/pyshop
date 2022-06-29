@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models.product import Product
 from .models.product import Category
 from .forms.form import CustomerForm
+from django.contrib.auth.hashers import make_password
 
 def index(request):
     # return HttpResponse('<h1>Hello</h1>')
@@ -18,14 +19,17 @@ def index(request):
 
 
 def signup(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         #print(request.POST.get('email'))
-        customer=CustomerForm(request.POST)
-        if customer.is_valid:
+        form = CustomerForm(request.POST)
+        #make_password(form.data['email'])
+        if form.is_valid():
             try:
-                customer.save()
-                return HttpResponse("data send to database")
+                form.register()
+                # return HttpResponse("data send to database")
+                return redirect('homepage')
             except:
                 pass
-    form=CustomerForm()
-    return render(request, 'signup.html',{'form':form})
+    else:
+        form = CustomerForm()
+    return render(request, 'signup.html', {'form': form})
