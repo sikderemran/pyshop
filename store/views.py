@@ -33,3 +33,10 @@ def signup(request):
     else:
         form = CustomerForm()
     return render(request, 'signup.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+    else:
+        form = CustomerForm()
+    return render(request, 'login.html', {'form': form})
