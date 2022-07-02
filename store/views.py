@@ -37,6 +37,9 @@ def signup(request):
 def login(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
+        customer=form.login()
+        if customer:
+            return redirect('homepage')
     else:
         form = CustomerForm()
     return render(request, 'login.html', {'form': form})

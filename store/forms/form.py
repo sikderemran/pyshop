@@ -30,4 +30,6 @@ class CustomerForm(forms.ModelForm):
     def register(self):
         #self.data['email']
         self.save()
+    def login(self):
+        return Customer.objects.get(email=self.data['email'],password=self.data['password'])
     
