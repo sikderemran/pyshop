@@ -31,5 +31,8 @@ class CustomerForm(forms.ModelForm):
         #self.data['email']
         self.save()
     def login(self):
-        return Customer.objects.get(email=self.data['email'],password=self.data['password'])
+        try:
+           return Customer.objects.get(email=self.data['email'],password=self.data['password'])
+        except:
+            return False
     
