@@ -24,7 +24,7 @@ class Index(View):
         cart=request.session.get('cart')
         if cart:
             quantity=cart.get(product)
-            if quantity<=1:
+            if quantity:
                 if remove:
                     if quantity<=1:
                         cart.pop(product)

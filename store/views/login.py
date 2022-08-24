@@ -13,10 +13,13 @@ class Login(View):
             form = CustomerForm(request.POST)
             customer = form.login()
         if customer:
-            request.session['id']=customer.id
-            request.session['email']=customer.email
+            request.session['customer']=customer.id
             return redirect('homepage')
         else:
             error = '''Email or Password Incorrect'''
             data = {'form': form, 'error': error}
             return render(request, 'login.html', data)
+
+def logout(request):
+    request.session.clear()
+    return redirect('login')
