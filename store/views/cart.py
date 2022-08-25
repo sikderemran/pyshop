@@ -5,7 +5,7 @@ from django.views import View
 class Cart(View):
     def get(self, request):
         ids=list(request.session.get('cart').keys())
-        Product.getCartProduct(ids)
-        return render(request, 'cart.html')
+        products=Product.getCartProduct(ids)
+        return render(request, 'cart.html',{'products':products})
 
   
