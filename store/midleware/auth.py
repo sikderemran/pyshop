@@ -1,0 +1,11 @@
+from django.shortcuts import redirect
+
+def authMiddleware(get_response):
+    def middleware(request):
+        returnUrl=request.META['PATH_INFO']
+        if not request.session.get('customer'):
+            return redirect(f'login?returnUrl={returnUrl}')
+        response = get_response(request)
+        return response
+
+    return middleware

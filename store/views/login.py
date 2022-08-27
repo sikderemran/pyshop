@@ -1,9 +1,12 @@
-from django.shortcuts import redirect, render
+from tkinter.messagebox import NO
+from django.shortcuts import redirect, render,HttpResponseRedirect
 from ..forms.form import CustomerForm
 from django.views import View
 
 class Login(View):
+    returnUrl=None
     def get(self, request):
+        Login.returnUrl=request.GET.get('returnUrl')
         form = CustomerForm()
         data = {'form': form}
         return render(request, 'login.html', data)
@@ -14,7 +17,11 @@ class Login(View):
             customer = form.login()
         if customer:
             request.session['customer']=customer.id
-            return redirect('homepage')
+            if Login.returnUrl:
+                return HttpResponseRedirect(Login.returnUrl)
+            else:
+                Login.returnUrl=None
+                return redirect('homepage')
         else:
             error = '''Email or Password Incorrect'''
             data = {'form': form, 'error': error}

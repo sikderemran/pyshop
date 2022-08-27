@@ -7,4 +7,8 @@ register = template.Library()
 def currency(number):
     return "৳" + str(number)
 
+@register.filter(name='priceMultiply')
+def priceMultiply(number,numberOne):
+    return number*numberOne
+
      
